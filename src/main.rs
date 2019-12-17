@@ -4,16 +4,16 @@ extern crate regex;
 use rand::Rng;
 use regex::Regex;
 
-fn d_n(n: u8) -> u8 {
+fn d_n(n: i8) -> i8 {
     let mut rng = rand::thread_rng();
     rng.gen_range(1, n+1)
 }
 
-fn roll(n: u8, m: u8, x: Option<u8>, best: Option<u8>, worst: Option<u8>) -> u8 {
+fn roll(n: i8, m: i8, x: Option<i8>, best: Option<i8>, worst: Option<i8>) -> i8 {
     if n == 0 || m == 0 {
         return 0;
     }
-    let mut rolls = vec![0; n as usize].iter().map(|_| { d_n(m) }).collect::<Vec<u8>>();
+    let mut rolls = vec![0; n as usize].iter().map(|_| { d_n(m) }).collect::<Vec<i8>>();
     rolls.sort();
     if let Some(b) = best {
         if b <= n {
@@ -24,7 +24,7 @@ fn roll(n: u8, m: u8, x: Option<u8>, best: Option<u8>, worst: Option<u8>) -> u8 
             rolls = rolls[0..w as usize].to_vec();
         }
     }
-    let sum = rolls.iter().sum::<u8>();
+    let sum = rolls.iter().sum::<i8>();
     if let Some(modifier) = x {
         sum + modifier
     } else {
@@ -38,12 +38,12 @@ fn test_dice_roll() {
     assert_eq!(x, 3)
 }
 
-fn parse(expression: String) -> u8 {
-    let exp_re = Regex::new(r"^(?P<n>\d+?)?d(?P<m>\d+)(b(?P<b>\d+?))?(w(?P<w>\d+?))?(\-(?P<x>\d+?))?$").unwrap();
-    let num_re = Regex::new(r"^(\d+)$").unwrap();
-    fn str_to_int_option(capture: Option<regex::Match>) -> Option<u8> {
+fn parse(expression: String) -> i8 {
+    let exp_re = Regex::new(r"^(?P<n>\d+?)?d(?P<m>\d+)(b(?P<b>\d+?))?(w(?P<w>\d+?))?(?P<x>\-\d+?)?$").unwrap();
+    let num_re = Regex::new(r"^(-?\d+)$").unwrap();
+    fn str_to_int_option(capture: Option<regex::Match>) -> Option<i8> {
         if let Some(unwrapped) = capture {
-            let value = unwrapped.as_str().parse::<u8>().unwrap();
+            let value = unwrapped.as_str().parse::<i8>().unwrap();
             Some(value)
         } else {
             None
@@ -53,8 +53,8 @@ fn parse(expression: String) -> u8 {
         .map(|sub_exp| {
             if exp_re.is_match(&sub_exp) {
                 let captures = exp_re.captures(sub_exp).unwrap();
-                let n = captures.name("n").ok_or("1").unwrap().as_str().parse::<u8>().unwrap();
-                let m = captures.name("m").unwrap().as_str().parse::<u8>().unwrap();
+                let n = captures.name("n").ok_or("1").unwrap().as_str().parse::<i8>().unwrap();
+                let m = captures.name("m").unwrap().as_str().parse::<i8>().unwrap();
                 let x = str_to_int_option(captures.name("x"));
                 let b = str_to_int_option(captures.name("b"));
                 let w = str_to_int_option(captures.name("w"));
@@ -82,6 +82,12 @@ fn test_parse() {
     assert!(roll3 > 0);
     assert!(roll3 < 12);
     assert!(roll4 == 3);
+}
+
+#[test]
+fn test_parse_bad() {
+    let roll1 = parse(String::from("hello world"));
+    assert!(roll1 == 0);
 }
 
 fn main() {
