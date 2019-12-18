@@ -38,7 +38,10 @@ binary to Cargo's default location in your home directory:
 $ cargo install --git https://github.com/garbados/roll-rs.git --root $HOME/.cargo
 ```
 
-Then restart your terminal or run `exec bash` and you should be able to run
+If you've already installed `roll-rs` but want to upgrade, append the `--force`
+flag to reinstall.
+
+Afterwards, restart your terminal or run `exec bash` and you should be able to run
 `roll-rs`, if `$HOME/.cargo/bin` is in your `$PATH`.
 
 ## Testing
