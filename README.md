@@ -48,6 +48,3 @@ To run the test suite, get the source code and run `cargo test`.
 
 [GPL-3.0](https://opensource.org/licenses/GPL-3.0).
 
-And remember, comrades:
-Agitate! Educate! Organize!
-[The union makes us strong.](https://www.youtube.com/watch?v=RKhwitXvVj8)
