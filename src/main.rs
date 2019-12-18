@@ -108,7 +108,7 @@ fn main() {
             println!("You can enter multiple dice expressions separated by a space.");
             println!("They will each be evaluated separately. For example:");
             println!("");
-            println!("  $ roll 1d20+2 1d8+1");
+            println!("  $ {} 1d20+2 1d8+1", &args[0]);
             println!("  1d20+2 => 16");
             println!("  1d8+1 => 4");
         },
