@@ -1,5 +1,7 @@
 # roll-rs
 
+[![Build Status](https://travis-ci.org/garbados/roll-rs.svg?branch=master)](https://travis-ci.org/garbados/roll-rs)
+
 A simple dice-rolling utility, in Rust!
 
 ## Usage
