@@ -6,10 +6,11 @@ A simple dice-rolling utility, in Rust!
 
 ## Usage
 
-roll-rs understands a `NdMbB?wW[+-]X?` syntax, which is probably unreadable
+roll-rs understands a `N?dMbB?wW[+-]X?` syntax, which is probably unreadable
 if software hasn't already rotted your brain. Here are some examples:
 
 - `1d8`: Roll one eight-sided die.
+- `d8`: Roll one eight-sided die.
 - `1d4+1`: Roll one four-sided die and add one.
 - `2d20b1`: Roll two twenty-sided dice and take the higher roll.
 - `5d6w4`: Roll five six-sided dice and take the worst four rolls.
@@ -47,4 +48,3 @@ To run the test suite, get the source code and run `cargo test`.
 ## License
 
 [GPL-3.0](https://opensource.org/licenses/GPL-3.0).
-
