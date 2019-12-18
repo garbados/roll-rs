@@ -7,7 +7,7 @@ A simple dice-rolling utility, in Rust!
 ## Usage
 
 roll-rs understands a `NdM[+-]XbB?wW?` syntax, which is probably unreadable
-if software hasn't already rotted your brain. Here are some example:
+if software hasn't already rotted your brain. Here are some examples:
 
 - `1d8`: Roll one eight-sided die.
 - `1d4+1`: Roll one four-sided die and add one.
